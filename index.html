@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKM Financial Services — Loans &amp; Credit Solutions</title>
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23070D1A'/%3E%3Cpath d='M10 46 L10 26 Q10 18 18 18 L20 18 Q26 18 28 23 L28 23 Q30 28 24 31 L32 46' stroke='%230099FF' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M34 18 L34 46 M34 18 L44 18 Q52 18 52 26 Q52 32 44 32 L34 32 M34 32 L46 46' stroke='%230099FF' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg:      '#070D1A',
+              surface: '#0D1829',
+              elevated:'#122035',
+              float:   '#172640',
+              blue:    '#0099FF',
+              bluedim: '#0077CC',
+              teal:    '#00D4CC',
+              white:   '#FFFFFF',
+              lgrey:   '#C8D6E5',
+              mgrey:   '#4A6A8A',
+              dgrey:   '#1E2D40',
+            }
+          },
+          fontFamily: {
+            mono: ['Roboto Mono', 'monospace'],
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070D1A;
+      color: #C8D6E5;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* Global radial glow background */
+    .page-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 40% at 20% 10%, rgba(0,153,255,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 85% 80%, rgba(0,212,204,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,153,255,0.03) 0%, transparent 80%);
+    }
+
+    /* Typography helpers */
+    .heading-display {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+    .body-text { line-height: 1.7; }
+
+    /* Gradient text */
+    .text-gradient {
+      background: linear-gradient(135deg, #0099FF 0%, #00D4CC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Card surface */
+    .card {
+      background: linear-gradient(145deg, #0D1829 0%, #122035 100%);
+      border: 1px solid rgba(0,153,255,0.12);
+      border-radius: 16px;
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.4),
+        0 1px 0 rgba(0,153,255,0.08) inset,
+        0 0 0 1px rgba(255,255,255,0.02) inset;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,153,255,0.3);
+      box-shadow:
+        0 16px 48px rgba(0,0,0,0.5),
+        0 0 32px rgba(0,153,255,0.1),
+        0 1px 0 rgba(0,153,255,0.15) inset;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #0099FF 0%, #0077CC 100%);
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0,153,255,0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease, opacity 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 36px rgba(0,153,255,0.5), 0 1px 0 rgba(255,255,255,0.2) inset;
+    }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+    .btn-primary:focus-visible { outline: 2px solid #0099FF; outline-offset: 3px; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      background: transparent;
+      color: #0099FF;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 1.5px solid rgba(0,153,255,0.5);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      transform: translateY(-2px);
+      border-color: #0099FF;
+      background: rgba(0,153,255,0.08);
+    }
+    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:focus-visible { outline: 2px solid #0099FF; outline-offset: 3px; }
+
+    /* Nav */
+    .nav-link {
+      color: #C8D6E5;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0; right: 0;
+      height: 1.5px;
+      background: #0099FF;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* Stat number */
+    .stat-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #0099FF, #00D4CC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Section divider line */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #0099FF, #00D4CC);
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* Floating badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(0,153,255,0.1);
+      border: 1px solid rgba(0,153,255,0.25);
+      border-radius: 50px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: #0099FF;
+      text-transform: uppercase;
+    }
+    .badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #0099FF;
+      box-shadow: 0 0 6px #0099FF;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    /* Service icon ring */
+    .icon-ring {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0,153,255,0.15), rgba(0,212,204,0.1));
+      border: 1px solid rgba(0,153,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .card:hover .icon-ring {
+      transform: scale(1.12) rotate(-3deg);
+      box-shadow: 0 0 20px rgba(0,153,255,0.25);
+    }
+
+    /* Step connector */
+    .step-line {
+      position: absolute;
+      top: 28px;
+      left: calc(50% + 28px);
+      right: calc(-50% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,153,255,0.4), rgba(0,153,255,0.1));
+    }
+
+    /* Testimonial quote mark */
+    .quote-mark {
+      font-size: 5rem;
+      font-family: Georgia, serif;
+      line-height: 0.8;
+      color: rgba(0,153,255,0.15);
+      user-select: none;
+    }
+
+    /* Scroll fade-in */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile nav toggle */
+    #mobile-nav { display: none; }
+    @media (max-width: 768px) {
+      #mobile-nav.open { display: flex; }
+    }
+  </style>
+</head>
+<body class="relative">
+  <div class="page-glow"></div>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(7,13,26,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,153,255,0.08);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 no-underline" style="text-decoration:none">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0099FF" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#00D4CC" stop-opacity="0.06"/>
+            </linearGradient>
+            <linearGradient id="logo-text-grad" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0099FF"/>
+              <stop offset="100%" stop-color="#00D4CC"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="10" fill="#0A1628"/>
+          <rect width="40" height="40" rx="10" fill="url(#logo-bg)"/>
+          <!-- Bold "SKM" text mark -->
+          <text x="20" y="24" text-anchor="middle"
+            font-family="Roboto Mono, monospace" font-weight="700" font-size="12.5"
+            fill="url(#logo-text-grad)" letter-spacing="-0.5">SKM</text>
+          <!-- Accent underline -->
+          <rect x="8" y="30" width="24" height="2" rx="1" fill="url(#logo-text-grad)"/>
+        </svg>
+        <span style="font-family:'Roboto Mono',monospace; font-weight:700; font-size:1.1rem; color:#fff; letter-spacing:-0.01em;">SKM <span style="color:#0099FF;">Financial</span></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <a href="#contact" class="btn-outline" style="padding:10px 22px; font-size:0.75rem;">Login</a>
+        <a href="#contact" class="btn-primary" style="padding:10px 22px; font-size:0.75rem;">Get Started</a>
+      </div>
+
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-none" aria-label="Toggle menu"
+        onclick="document.getElementById('mobile-nav').classList.toggle('open')"
+        style="background:none; border:none; cursor:pointer;">
+        <span class="block w-6 h-0.5 bg-white rounded"></span>
+        <span class="block w-4 h-0.5 bg-white rounded"></span>
+        <span class="block w-6 h-0.5 bg-white rounded"></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <nav id="mobile-nav" class="flex-col gap-4 px-6 py-5 md:hidden" style="border-top:1px solid rgba(0,153,255,0.08); background:rgba(7,13,26,0.97);">
+      <a href="#services" class="nav-link" onclick="document.getElementById('mobile-nav').classList.remove('open')">Services</a>
+      <a href="#how-it-works" class="nav-link" onclick="document.getElementById('mobile-nav').classList.remove('open')">How It Works</a>
+      <a href="#about" class="nav-link" onclick="document.getElementById('mobile-nav').classList.remove('open')">About</a>
+      <a href="#testimonials" class="nav-link" onclick="document.getElementById('mobile-nav').classList.remove('open')">Testimonials</a>
+      <div class="flex gap-3 pt-2">
+        <a href="#contact" class="btn-outline" style="padding:10px 20px; font-size:0.75rem;">Login</a>
+        <a href="#contact" class="btn-primary" style="padding:10px 20px; font-size:0.75rem;">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-20" style="overflow:hidden;">
+
+    <!-- Background hero lines decoration -->
+    <div class="absolute inset-0 pointer-events-none" style="z-index:1;">
+      <svg class="absolute top-0 right-0 w-full h-full opacity-10" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <circle cx="900" cy="200" r="350" stroke="#0099FF" stroke-width="0.8" stroke-dasharray="4 8"/>
+        <circle cx="900" cy="200" r="250" stroke="#0099FF" stroke-width="0.5" stroke-dasharray="3 12"/>
+        <circle cx="900" cy="200" r="150" stroke="#00D4CC" stroke-width="0.5" stroke-dasharray="2 10"/>
+        <line x1="0" y1="400" x2="1200" y2="400" stroke="#0099FF" stroke-width="0.4" stroke-dasharray="8 16" opacity="0.5"/>
+        <line x1="600" y1="0" x2="600" y2="800" stroke="#0099FF" stroke-width="0.4" stroke-dasharray="8 16" opacity="0.5"/>
+        <!-- Grid dots -->
+        <g opacity="0.3">
+          <circle cx="100" cy="150" r="1.5" fill="#0099FF"/>
+          <circle cx="200" cy="300" r="1.5" fill="#0099FF"/>
+          <circle cx="150" cy="450" r="1.5" fill="#00D4CC"/>
+          <circle cx="300" cy="200" r="1" fill="#0099FF"/>
+          <circle cx="450" cy="120" r="1" fill="#0099FF"/>
+          <circle cx="80" cy="600" r="1" fill="#00D4CC"/>
+        </g>
+      </svg>
+      <!-- Hero glow blob -->
+      <div style="position:absolute; top:-10%; right:-5%; width:65%; height:80%; background:radial-gradient(ellipse at center, rgba(0,153,255,0.12) 0%, transparent 65%); border-radius:50%;"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 z-10 w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left content -->
+        <div>
+          <div class="badge mb-6"><span class="dot"></span> Trusted Financial Partner</div>
+
+          <h1 class="heading-display mb-6" style="font-size: clamp(2.4rem, 5vw, 4rem); color:#fff;">
+            Unlock Your<br/>
+            Financial<br/>
+            <span class="text-gradient">Potential.</span>
+          </h1>
+
+          <p class="body-text mb-10" style="font-size:1.05rem; color:#C8D6E5; max-width:480px;">
+            From home loans to credit repair — SKM Financial Services provides personalized loan solutions and credit building strategies to help you move forward with confidence.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-14">
+            <a href="#contact" class="btn-primary">
+              Apply Now
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#services" class="btn-outline">
+              Explore Services
+            </a>
+          </div>
+
+          <!-- Trust stats -->
+          <div class="flex flex-wrap gap-8">
+            <div>
+              <div class="stat-num">₹500Cr+</div>
+              <div style="font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:#4A6A8A; margin-top:2px;">Loans Disbursed</div>
+            </div>
+            <div style="width:1px; background:rgba(0,153,255,0.15);"></div>
+            <div>
+              <div class="stat-num">25K+</div>
+              <div style="font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:#4A6A8A; margin-top:2px;">Happy Clients</div>
+            </div>
+            <div style="width:1px; background:rgba(0,153,255,0.15);"></div>
+            <div>
+              <div class="stat-num">98%</div>
+              <div style="font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:#4A6A8A; margin-top:2px;">Approval Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — Hero visual card -->
+        <div class="relative flex justify-center lg:justify-end">
+          <!-- Main display card -->
+          <div style="
+            position:relative;
+            width:100%;
+            max-width:420px;
+            background: linear-gradient(145deg, #0D1829 0%, #122035 60%, #0D1829 100%);
+            border: 1px solid rgba(0,153,255,0.18);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,153,255,0.08);
+          ">
+            <!-- Card top label -->
+            <div style="font-family:'Roboto Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; color:#4A6A8A; text-transform:uppercase; margin-bottom:20px;">LOAN ELIGIBILITY CHECKER</div>
+
+            <!-- Loan type selector -->
+            <div style="display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap;">
+              <span style="padding:6px 14px; background:rgba(0,153,255,0.2); border:1px solid rgba(0,153,255,0.4); border-radius:50px; font-size:0.72rem; font-family:'Roboto Mono',monospace; color:#0099FF;">Personal</span>
+              <span style="padding:6px 14px; background:transparent; border:1px solid rgba(0,153,255,0.15); border-radius:50px; font-size:0.72rem; font-family:'Roboto Mono',monospace; color:#4A6A8A;">Home</span>
+              <span style="padding:6px 14px; background:transparent; border:1px solid rgba(0,153,255,0.15); border-radius:50px; font-size:0.72rem; font-family:'Roboto Mono',monospace; color:#4A6A8A;">Auto</span>
+              <span style="padding:6px 14px; background:transparent; border:1px solid rgba(0,153,255,0.15); border-radius:50px; font-size:0.72rem; font-family:'Roboto Mono',monospace; color:#4A6A8A;">Business</span>
+            </div>
+
+            <!-- Amount display -->
+            <div style="margin-bottom:20px;">
+              <div style="font-family:'Roboto Mono',monospace; font-size:0.65rem; letter-spacing:0.12em; color:#4A6A8A; text-transform:uppercase; margin-bottom:6px;">Loan Amount</div>
+              <div style="font-family:'Roboto Mono',monospace; font-size:2.4rem; font-weight:700; color:#fff; letter-spacing:-0.03em;">₹5,00,000</div>
+            </div>
+
+            <!-- Progress bar -->
+            <div style="margin-bottom:20px;">
+              <div style="height:4px; background:rgba(0,153,255,0.1); border-radius:2px; overflow:hidden;">
+                <div style="width:68%; height:100%; background:linear-gradient(90deg, #0099FF, #00D4CC); border-radius:2px;"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:6px;">
+                <span style="font-size:0.65rem; font-family:'Roboto Mono',monospace; color:#4A6A8A;">₹50K</span>
+                <span style="font-size:0.65rem; font-family:'Roboto Mono',monospace; color:#4A6A8A;">₹50L</span>
+              </div>
+            </div>
+
+            <!-- Details grid -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
+              <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:12px;">
+                <div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Interest Rate</div>
+                <div style="font-size:1.1rem; font-weight:700; font-family:'Roboto Mono',monospace; color:#0099FF;">10.5% <span style="font-size:0.7rem; color:#4A6A8A;">p.a.</span></div>
+              </div>
+              <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:12px;">
+                <div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Tenure</div>
+                <div style="font-size:1.1rem; font-weight:700; font-family:'Roboto Mono',monospace; color:#00D4CC;">36 <span style="font-size:0.7rem; color:#4A6A8A;">months</span></div>
+              </div>
+            </div>
+
+            <a href="#contact" class="btn-primary" style="width:100%; justify-content:center; font-size:0.8rem;">
+              Check Eligibility
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <!-- Decoration circles -->
+            <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:radial-gradient(circle, rgba(0,153,255,0.15) 0%, transparent 70%); pointer-events:none;"></div>
+          </div>
+
+          <!-- Floating badge cards -->
+          <div style="position:absolute; bottom:-16px; left:-16px; background:#0D1829; border:1px solid rgba(0,212,204,0.25); border-radius:12px; padding:12px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,rgba(0,212,204,0.2),rgba(0,153,255,0.1));border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#00D4CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div style="font-size:0.7rem;font-family:'Roboto Mono',monospace;font-weight:600;color:#fff;">Instant Approval</div>
+              <div style="font-size:0.62rem;color:#4A6A8A;">In as little as 24 hrs</div>
+            </div>
+          </div>
+
+          <div style="position:absolute; top:20px; left:-30px; background:#0D1829; border:1px solid rgba(0,153,255,0.2); border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px; box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+            <div style="width:8px;height:8px;border-radius:50%;background:#0099FF;box-shadow:0 0 8px #0099FF;"></div>
+            <span style="font-size:0.65rem;font-family:'Roboto Mono',monospace;color:#C8D6E5;">256-bit SSL Secured</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TRUST BAR ═══════════════════ -->
+  <section style="border-top:1px solid rgba(0,153,255,0.08); border-bottom:1px solid rgba(0,153,255,0.08); background:rgba(13,24,41,0.6); padding:20px 0;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:32px 48px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#0099FF" stroke-width="1.8" fill="none"/></svg>
+          <span style="font-size:0.75rem; letter-spacing:0.08em; color:#C8D6E5; font-weight:500;">RBI Registered</span>
+        </div>
+        <div style="width:1px; height:20px; background:rgba(0,153,255,0.15);"></div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#0099FF" stroke-width="1.8" fill="none"/></svg>
+          <span style="font-size:0.75rem; letter-spacing:0.08em; color:#C8D6E5; font-weight:500;">Fully Secured</span>
+        </div>
+        <div style="width:1px; height:20px; background:rgba(0,153,255,0.15);"></div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#0099FF" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span style="font-size:0.75rem; letter-spacing:0.08em; color:#C8D6E5; font-weight:500;">24/7 Support</span>
+        </div>
+        <div style="width:1px; height:20px; background:rgba(0,153,255,0.15);"></div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size:0.75rem; letter-spacing:0.08em; color:#C8D6E5; font-weight:500;">Expert Advisors</span>
+        </div>
+        <div style="width:1px; height:20px; background:rgba(0,153,255,0.15);"></div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size:0.75rem; letter-spacing:0.08em; color:#C8D6E5; font-weight:500;">Free Credit Check</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SERVICES ═══════════════════ -->
+  <section id="services" class="py-24 lg:py-32 relative" style="z-index:2;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-16 fade-up">
+        <div class="divider mx-auto"></div>
+        <div class="badge mb-4" style="margin:0 auto 16px;">Our Services</div>
+        <h2 class="heading-display mb-4" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); color:#fff;">
+          Every Loan, Every Need.
+        </h2>
+        <p class="body-text" style="color:#4A6A8A; max-width:480px; margin:0 auto; font-size:0.95rem;">
+          We partner with 50+ lenders to find the best rates and terms tailored to your financial profile.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Personal Loan -->
+        <div class="card p-8 fade-up">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM1 10h22" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Personal Loan</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Instant funds for medical emergencies, education, travel, weddings, or anything you need — with minimal documentation.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,153,255,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Rate from</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">10.5% p.a.</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Up to</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">₹50 Lakh</div></div>
+          </div>
+        </div>
+
+        <!-- Home Loan -->
+        <div class="card p-8 fade-up" style="transition-delay:0.1s;">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="9 22 9 12 15 12 15 22" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Home Loan</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Finance your dream home with competitive interest rates, flexible EMIs, and expert guidance through every step of the process.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,153,255,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Rate from</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">8.4% p.a.</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Up to</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">₹5 Crore</div></div>
+          </div>
+        </div>
+
+        <!-- Auto Loan -->
+        <div class="card p-8 fade-up" style="transition-delay:0.2s;">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="17" r="2" stroke="#0099FF" stroke-width="2"/><circle cx="8" cy="17" r="2" stroke="#0099FF" stroke-width="2"/><path d="M9 17h5" stroke="#0099FF" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Auto Loan</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Drive your dream car with easy auto financing for new and pre-owned vehicles. Fast approval, flexible tenures, low down payments.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,153,255,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Rate from</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">9.0% p.a.</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Up to</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">100% Finance</div></div>
+          </div>
+        </div>
+
+        <!-- Business Loan -->
+        <div class="card p-8 fade-up" style="transition-delay:0.3s;">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#00D4CC" stroke-width="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="#00D4CC" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="12" x2="12" y2="16" stroke="#00D4CC" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="14" x2="16" y2="14" stroke="#00D4CC" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Business Loan</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Fuel your business growth — working capital, equipment financing, expansion loans, and MSME credit with minimal collateral.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,212,204,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Rate from</div><div style="font-family:'Roboto Mono',monospace; color:#00D4CC; font-weight:700;">12% p.a.</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Up to</div><div style="font-family:'Roboto Mono',monospace; color:#00D4CC; font-weight:700;">₹2 Crore</div></div>
+          </div>
+        </div>
+
+        <!-- Education Loan -->
+        <div class="card p-8 fade-up" style="transition-delay:0.4s;">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Education Loan</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Invest in your future with education loans for domestic and overseas studies. Covers tuition, living expenses, and more.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,153,255,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Rate from</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">9.5% p.a.</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Up to</div><div style="font-family:'Roboto Mono',monospace; color:#0099FF; font-weight:700;">₹1.5 Crore</div></div>
+          </div>
+        </div>
+
+        <!-- Credit Repair -->
+        <div class="card p-8 fade-up" style="transition-delay:0.5s; border-color:rgba(0,212,204,0.2);">
+          <div class="icon-ring" style="background:linear-gradient(135deg,rgba(0,212,204,0.15),rgba(0,153,255,0.08)); border-color:rgba(0,212,204,0.25);">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="#00D4CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17 6 23 6 23 12" stroke="#00D4CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="badge mb-3" style="font-size:0.6rem; padding:3px 10px; border-color:rgba(0,212,204,0.3); color:#00D4CC; background:rgba(0,212,204,0.08);">
+            <span class="dot" style="background:#00D4CC; box-shadow:0 0 6px #00D4CC;"></span> Most Popular
+          </div>
+          <h3 style="font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:10px;">Credit Score Repair</h3>
+          <p class="body-text" style="font-size:0.875rem; color:#4A6A8A; margin-bottom:20px;">Struggling with a low CIBIL score? Our experts dispute errors, negotiate settlements, and build a roadmap to 750+.</p>
+          <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid rgba(0,212,204,0.1);">
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Results in</div><div style="font-family:'Roboto Mono',monospace; color:#00D4CC; font-weight:700;">90 Days</div></div>
+            <div><div style="font-size:0.6rem; font-family:'Roboto Mono',monospace; color:#4A6A8A; text-transform:uppercase; letter-spacing:0.1em;">Score target</div><div style="font-family:'Roboto Mono',monospace; color:#00D4CC; font-weight:700;">750+</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+  <section id="how-it-works" class="py-24 lg:py-32 relative" style="z-index:2; background:linear-gradient(180deg, transparent 0%, rgba(13,24,41,0.4) 50%, transparent 100%);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-16 fade-up">
+        <div class="badge mb-4" style="margin:0 auto 16px;">Process</div>
+        <h2 class="heading-display mb-4" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); color:#fff;">
+          4 Steps to Approval.
+        </h2>
+        <p class="body-text" style="color:#4A6A8A; max-width:420px; margin:0 auto; font-size:0.95rem;">
+          Our streamlined process gets you from application to approval in record time.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8 relative">
+
+        <!-- Connecting line (desktop) -->
+        <div class="hidden md:block absolute top-10 left-1/4 right-1/4" style="height:1px; background:linear-gradient(90deg, rgba(0,153,255,0.3), rgba(0,212,204,0.3)); top:28px; left:14%; right:14%;"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center fade-up">
+          <div style="position:relative; width:56px; height:56px; margin:0 auto 20px; background:linear-gradient(135deg,#0099FF,#0077CC); border-radius:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(0,153,255,0.35);">
+            <span style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:1.1rem;">01</span>
+          </div>
+          <h4 style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:8px;">Apply Online</h4>
+          <p style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">Fill our simple form in under 3 minutes. No paperwork upfront required.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center fade-up" style="transition-delay:0.15s;">
+          <div style="position:relative; width:56px; height:56px; margin:0 auto 20px; background:#122035; border:2px solid rgba(0,153,255,0.4); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Roboto Mono',monospace; font-weight:700; color:#0099FF; font-size:1.1rem;">02</span>
+          </div>
+          <h4 style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:8px;">Document Verification</h4>
+          <p style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">Submit KYC and income documents. Our team verifies them within hours.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center fade-up" style="transition-delay:0.3s;">
+          <div style="position:relative; width:56px; height:56px; margin:0 auto 20px; background:#122035; border:2px solid rgba(0,153,255,0.4); border-radius:16px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Roboto Mono',monospace; font-weight:700; color:#0099FF; font-size:1.1rem;">03</span>
+          </div>
+          <h4 style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:8px;">Get Approved</h4>
+          <p style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">We match you with the best lender and secure your approval within 24 hours.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="text-center fade-up" style="transition-delay:0.45s;">
+          <div style="position:relative; width:56px; height:56px; margin:0 auto 20px; background:linear-gradient(135deg,#00D4CC,#0099FF); border-radius:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(0,212,204,0.3);">
+            <span style="font-family:'Roboto Mono',monospace; font-weight:700; color:#070D1A; font-size:1.1rem;">04</span>
+          </div>
+          <h4 style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:0.95rem; margin-bottom:8px;">Receive Funds</h4>
+          <p style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">Funds directly credited to your bank account. As fast as same day disbursement.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT / CREDIT REPAIR DEEP DIVE ═══════════════════ -->
+  <section id="about" class="py-24 lg:py-32 relative" style="z-index:2;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left — Credit score visual -->
+        <div class="relative fade-up">
+          <div style="
+            background: linear-gradient(145deg, #0D1829 0%, #122035 100%);
+            border: 1px solid rgba(0,153,255,0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+          ">
+            <div style="font-family:'Roboto Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; color:#4A6A8A; text-transform:uppercase; margin-bottom:24px;">CREDIT SCORE DASHBOARD</div>
+
+            <!-- Score gauge -->
+            <div style="text-align:center; margin-bottom:28px;">
+              <svg width="200" height="110" viewBox="0 0 200 110" style="display:block; margin:0 auto;">
+                <!-- Background arc -->
+                <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="rgba(0,153,255,0.1)" stroke-width="12" stroke-linecap="round"/>
+                <!-- Progress arc (75% = 750 score) -->
+                <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="url(#gauge-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="62.8"/>
+                <!-- Center score -->
+                <text x="100" y="88" text-anchor="middle" style="font-family:'Roboto Mono',monospace; font-weight:700; font-size:28px; fill:#fff;">756</text>
+                <text x="100" y="105" text-anchor="middle" style="font-family:'Roboto Mono',monospace; font-size:9px; fill:#4A6A8A; letter-spacing:0.1em; text-transform:uppercase;">CIBIL Score</text>
+                <defs>
+                  <linearGradient id="gauge-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#0099FF"/>
+                    <stop offset="100%" stop-color="#00D4CC"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div style="display:inline-flex; align-items:center; gap:6px; padding:4px 14px; background:rgba(0,212,204,0.1); border:1px solid rgba(0,212,204,0.25); border-radius:50px; margin-top:4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="#00D4CC" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span style="font-family:'Roboto Mono',monospace; font-size:0.7rem; color:#00D4CC; font-weight:600;">+124 pts in 90 days</span>
+              </div>
+            </div>
+
+            <!-- Score breakdown bars -->
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="font-size:0.72rem; color:#C8D6E5;">Payment History</span><span style="font-family:'Roboto Mono',monospace; font-size:0.72rem; color:#0099FF; font-weight:600;">Excellent</span></div>
+                <div style="height:4px; background:rgba(0,153,255,0.1); border-radius:2px;"><div style="width:90%; height:100%; background:linear-gradient(90deg,#0099FF,#00D4CC); border-radius:2px;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="font-size:0.72rem; color:#C8D6E5;">Credit Utilization</span><span style="font-family:'Roboto Mono',monospace; font-size:0.72rem; color:#0099FF; font-weight:600;">Good</span></div>
+                <div style="height:4px; background:rgba(0,153,255,0.1); border-radius:2px;"><div style="width:72%; height:100%; background:linear-gradient(90deg,#0099FF,#00D4CC); border-radius:2px;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="font-size:0.72rem; color:#C8D6E5;">Credit Age</span><span style="font-family:'Roboto Mono',monospace; font-size:0.72rem; color:#00D4CC; font-weight:600;">Very Good</span></div>
+                <div style="height:4px; background:rgba(0,153,255,0.1); border-radius:2px;"><div style="width:80%; height:100%; background:linear-gradient(90deg,#0099FF,#00D4CC); border-radius:2px;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span style="font-size:0.72rem; color:#C8D6E5;">New Inquiries</span><span style="font-family:'Roboto Mono',monospace; font-size:0.72rem; color:#0099FF; font-weight:600;">Fair</span></div>
+                <div style="height:4px; background:rgba(0,153,255,0.1); border-radius:2px;"><div style="width:55%; height:100%; background:linear-gradient(90deg,#0099FF,#00D4CC); border-radius:2px;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — Copy -->
+        <div class="fade-up" style="transition-delay:0.2s;">
+          <div class="divider"></div>
+          <div class="badge mb-4">Credit Repair</div>
+          <h2 class="heading-display mb-6" style="font-size: clamp(1.8rem, 3vw, 2.6rem); color:#fff;">
+            Low Score?<br/>
+            We'll Fix It<br/>
+            <span class="text-gradient">Together.</span>
+          </h2>
+          <p class="body-text mb-6" style="font-size:0.95rem; color:#4A6A8A;">
+            A poor credit score locks you out of loans, favorable interest rates, and financial opportunities. Our certified credit counselors work directly with bureaus and lenders on your behalf.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:32px;">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div style="min-width:28px; height:28px; background:rgba(0,153,255,0.1); border:1px solid rgba(0,153,255,0.25); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0099FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div><div style="font-weight:600; color:#fff; font-size:0.9rem; margin-bottom:2px;">CIBIL Error Disputes</div><div style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">We identify and dispute inaccurate negative marks on your credit report.</div></div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div style="min-width:28px; height:28px; background:rgba(0,153,255,0.1); border:1px solid rgba(0,153,255,0.25); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0099FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div><div style="font-weight:600; color:#fff; font-size:0.9rem; margin-bottom:2px;">Debt Settlement Negotiation</div><div style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">Negotiate with lenders to reduce outstanding balances and mark accounts settled.</div></div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div style="min-width:28px; height:28px; background:rgba(0,153,255,0.1); border:1px solid rgba(0,153,255,0.25); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:2px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0099FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div><div style="font-weight:600; color:#fff; font-size:0.9rem; margin-bottom:2px;">Personalized Credit Roadmap</div><div style="font-size:0.82rem; color:#4A6A8A; line-height:1.6;">A 6-12 month action plan tailored to your specific credit profile and goals.</div></div>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn-primary">
+            Get Free Credit Analysis
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+  <section id="testimonials" class="py-24 lg:py-32 relative" style="z-index:2; background:linear-gradient(180deg, transparent 0%, rgba(13,24,41,0.3) 50%, transparent 100%);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center mb-16 fade-up">
+        <div class="badge mb-4" style="margin:0 auto 16px;">Testimonials</div>
+        <h2 class="heading-display mb-4" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); color:#fff;">
+          Real People.<br/>Real Results.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="card p-8 fade-up">
+          <div class="quote-mark">"</div>
+          <p class="body-text" style="font-size:0.875rem; color:#C8D6E5; margin-bottom:20px; margin-top:-8px;">SKM helped me get a home loan when three other banks rejected my application. Their team worked tirelessly and got me approved at a great rate. I'm now living in my dream home!</p>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0099FF,#00D4CC);display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#070D1A;font-size:0.85rem;">RK</div>
+            <div>
+              <div style="font-weight:600; color:#fff; font-size:0.875rem;">Rajesh Kumar</div>
+              <div style="font-size:0.72rem; color:#4A6A8A;">Home Loan Customer, Mumbai</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:2px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-8 fade-up" style="transition-delay:0.15s; border-color:rgba(0,212,204,0.2);">
+          <div class="quote-mark" style="color:rgba(0,212,204,0.15);">"</div>
+          <p class="body-text" style="font-size:0.875rem; color:#C8D6E5; margin-bottom:20px; margin-top:-8px;">My CIBIL score was 520 and I had given up on ever getting a loan. SKM's credit repair team raised it to 748 in just 4 months. I just got a personal loan at 11% — couldn't be happier!</p>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00D4CC,#0099FF);display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#070D1A;font-size:0.85rem;">PS</div>
+            <div>
+              <div style="font-weight:600; color:#fff; font-size:0.875rem;">Priya Sharma</div>
+              <div style="font-size:0.72rem; color:#4A6A8A;">Credit Repair Client, Bangalore</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:2px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4CC"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4CC"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4CC"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4CC"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4CC"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-8 fade-up" style="transition-delay:0.3s;">
+          <div class="quote-mark">"</div>
+          <p class="body-text" style="font-size:0.875rem; color:#C8D6E5; margin-bottom:20px; margin-top:-8px;">Got my business loan processed in 48 hours. The team was incredibly professional and transparent about every step. I would recommend SKM to anyone looking for reliable financial assistance.</p>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#0052CC,#0099FF);display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#fff;font-size:0.85rem;">AM</div>
+            <div>
+              <div style="font-weight:600; color:#fff; font-size:0.875rem;">Arjun Mehta</div>
+              <div style="font-size:0.72rem; color:#4A6A8A;">Business Loan Customer, Delhi</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:2px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#0099FF"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CTA / CONTACT ═══════════════════ -->
+  <section id="contact" class="py-24 lg:py-32 relative" style="z-index:2;">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      <div style="
+        background: linear-gradient(145deg, #0D1829 0%, #122035 60%, #0D1829 100%);
+        border: 1px solid rgba(0,153,255,0.2);
+        border-radius: 28px;
+        padding: clamp(40px, 6vw, 72px);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 80px rgba(0,153,255,0.06);
+      " class="fade-up">
+
+        <!-- Decorative rings -->
+        <div style="position:absolute; top:-80px; right:-80px; width:240px; height:240px; border-radius:50%; border:1px solid rgba(0,153,255,0.08); pointer-events:none;"></div>
+        <div style="position:absolute; top:-40px; right:-40px; width:160px; height:160px; border-radius:50%; border:1px solid rgba(0,153,255,0.06); pointer-events:none;"></div>
+        <div style="position:absolute; bottom:-60px; left:-60px; width:180px; height:180px; border-radius:50%; border:1px solid rgba(0,212,204,0.06); pointer-events:none;"></div>
+
+        <div class="badge mb-6" style="margin:0 auto 24px; border-color:rgba(0,212,204,0.3); color:#00D4CC; background:rgba(0,212,204,0.08);">
+          <span class="dot" style="background:#00D4CC; box-shadow:0 0 6px #00D4CC;"></span> Free Consultation
+        </div>
+
+        <h2 class="heading-display mb-4" style="font-size:clamp(2rem,4vw,3rem); color:#fff;">
+          Ready to Take<br/><span class="text-gradient">Control?</span>
+        </h2>
+        <p class="body-text mb-10" style="color:#4A6A8A; max-width:440px; margin:0 auto 40px; font-size:0.95rem;">
+          Talk to a financial advisor today. No commitment, no fees — just honest guidance tailored to your situation.
+        </p>
+
+        <!-- Contact form -->
+        <form onsubmit="return false;" style="display:grid; gap:14px; max-width:480px; margin:0 auto 28px; text-align:left;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div>
+              <input type="text" placeholder="Full Name" style="width:100%; padding:12px 16px; background:rgba(0,0,0,0.3); border:1px solid rgba(0,153,255,0.15); border-radius:10px; color:#fff; font-family:'Montserrat',sans-serif; font-size:0.875rem; outline:none; transition:border-color 0.2s ease;" onfocus="this.style.borderColor='rgba(0,153,255,0.5)'" onblur="this.style.borderColor='rgba(0,153,255,0.15)'"/>
+            </div>
+            <div>
+              <input type="tel" placeholder="Phone Number" style="width:100%; padding:12px 16px; background:rgba(0,0,0,0.3); border:1px solid rgba(0,153,255,0.15); border-radius:10px; color:#fff; font-family:'Montserrat',sans-serif; font-size:0.875rem; outline:none; transition:border-color 0.2s ease;" onfocus="this.style.borderColor='rgba(0,153,255,0.5)'" onblur="this.style.borderColor='rgba(0,153,255,0.15)'"/>
+            </div>
+          </div>
+          <select style="width:100%; padding:12px 16px; background:rgba(0,0,0,0.3); border:1px solid rgba(0,153,255,0.15); border-radius:10px; color:#C8D6E5; font-family:'Montserrat',sans-serif; font-size:0.875rem; outline:none; appearance:none; transition:border-color 0.2s ease;" onfocus="this.style.borderColor='rgba(0,153,255,0.5)'" onblur="this.style.borderColor='rgba(0,153,255,0.15)'">
+            <option value="" disabled selected>Select Service</option>
+            <option>Personal Loan</option>
+            <option>Home Loan</option>
+            <option>Auto Loan</option>
+            <option>Business Loan</option>
+            <option>Education Loan</option>
+            <option>Credit Score Repair</option>
+          </select>
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px; font-size:0.875rem;">
+            Request Free Consultation
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <p style="font-size:0.72rem; color:#4A6A8A;">
+          By submitting, you agree to our <a href="#" style="color:#0099FF; text-decoration:none;">Privacy Policy</a>. We never share your data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer style="border-top:1px solid rgba(0,153,255,0.08); padding:48px 0 32px; position:relative; z-index:2;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+
+        <!-- Brand -->
+        <div class="md:col-span-2">
+          <a href="#" class="flex items-center gap-3 no-underline mb-4" style="text-decoration:none; display:inline-flex;">
+            <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logo-bg-f" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0099FF" stop-opacity="0.2"/><stop offset="100%" stop-color="#00D4CC" stop-opacity="0.06"/></linearGradient>
+                <linearGradient id="logo-text-grad-f" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0099FF"/><stop offset="100%" stop-color="#00D4CC"/></linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="10" fill="#0A1628"/>
+              <rect width="40" height="40" rx="10" fill="url(#logo-bg-f)"/>
+              <text x="20" y="24" text-anchor="middle" font-family="Roboto Mono, monospace" font-weight="700" font-size="12.5" fill="url(#logo-text-grad-f)" letter-spacing="-0.5">SKM</text>
+              <rect x="8" y="30" width="24" height="2" rx="1" fill="url(#logo-text-grad-f)"/>
+            </svg>
+            <div>
+              <div style="font-family:'Roboto Mono',monospace; font-weight:700; color:#fff; font-size:1rem;">SKM Financial Services</div>
+              <div style="font-size:0.65rem; color:#4A6A8A; letter-spacing:0.1em;">LOAN &amp; CREDIT EXPERTS</div>
+            </div>
+          </a>
+          <p style="font-size:0.82rem; color:#4A6A8A; line-height:1.7; max-width:280px; margin-bottom:20px;">
+            Empowering Indians with accessible financial solutions since 2012. RBI registered &amp; trusted by 25,000+ clients.
+          </p>
+          <div style="display:flex; gap:10px;">
+            <a href="#" style="width:34px;height:34px;background:rgba(0,153,255,0.1);border:1px solid rgba(0,153,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(0,153,255,0.2)';this.style.borderColor='rgba(0,153,255,0.4)'" onmouseout="this.style.background='rgba(0,153,255,0.1)';this.style.borderColor='rgba(0,153,255,0.2)'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" style="width:34px;height:34px;background:rgba(0,153,255,0.1);border:1px solid rgba(0,153,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(0,153,255,0.2)';this.style.borderColor='rgba(0,153,255,0.4)'" onmouseout="this.style.background='rgba(0,153,255,0.1)';this.style.borderColor='rgba(0,153,255,0.2)'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" style="width:34px;height:34px;background:rgba(0,153,255,0.1);border:1px solid rgba(0,153,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(0,153,255,0.2)';this.style.borderColor='rgba(0,153,255,0.4)'" onmouseout="this.style.background='rgba(0,153,255,0.1)';this.style.borderColor='rgba(0,153,255,0.2)'">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#0099FF" stroke-width="2"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" stroke="#0099FF" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h5 style="font-family:'Roboto Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#C8D6E5; margin-bottom:16px;">Services</h5>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Personal Loan</a></li>
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Home Loan</a></li>
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Auto Loan</a></li>
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Business Loan</a></li>
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Education Loan</a></li>
+            <li><a href="#services" style="font-size:0.82rem; color:#4A6A8A; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Credit Score Repair</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h5 style="font-family:'Roboto Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#C8D6E5; margin-bottom:16px;">Contact</h5>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top:2px; flex-shrink:0;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 11.08a19.79 19.79 0 01-3.07-8.59A2 2 0 012.62 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006 6l.89-.89a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 17z" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span style="font-size:0.82rem; color:#4A6A8A;">+91 98765 43210</span>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top:2px; flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/><polyline points="22,6 12,13 2,6" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span style="font-size:0.82rem; color:#4A6A8A;">info@skmfinancial.in</span>
+            </li>
+            <li style="display:flex; gap:10px; align-items:flex-start;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top:2px; flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#0099FF" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="#0099FF" stroke-width="1.8"/></svg>
+              <span style="font-size:0.82rem; color:#4A6A8A;">401, Fortune Tower,<br/>Andheri East, Mumbai — 400069</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom -->
+      <div style="border-top:1px solid rgba(0,153,255,0.08); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
+        <p style="font-size:0.72rem; color:#4A6A8A;">© 2026 SKM Financial Services Pvt. Ltd. All rights reserved.</p>
+        <div style="display:flex; gap:20px;">
+          <a href="#" style="font-size:0.72rem; color:#4A6A8A; text-decoration:none;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Privacy Policy</a>
+          <a href="#" style="font-size:0.72rem; color:#4A6A8A; text-decoration:none;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Terms of Service</a>
+          <a href="#" style="font-size:0.72rem; color:#4A6A8A; text-decoration:none;" onmouseover="this.style.color='#0099FF'" onmouseout="this.style.color='#4A6A8A'">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+  <script>
+    // Scroll fade-in — use rootMargin to pre-trigger before elements enter viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '200px 0px 200px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Force all visible immediately for full-page render (screenshot + initial load)
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+      }, 100);
+    });
+  </script>
+</body>
+</html>
